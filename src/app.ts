@@ -13,8 +13,8 @@ enum Category {
  TypeScript,
  Angular 
 }
-function getAllBooks(): Array<{ title: string, author: string, available: boolean, category: Category }> {
-  return [
+function getAllBooks()/*: Array<{ title: string, author: string, available: boolean, category: Category }> */{
+  return <const>[
     { title: 'Refactoring JavaScript', author: 'Evan Burchard', available: true, category: Category.JavaScript},
     { title: 'JavaScript Testing', author: 'Liang Yuxian Eugene', available: false, category: Category.JavaScript },
     { title: 'CSS Secrets', author: 'Lea Verou', available: true, category: Category.CSS },
@@ -56,7 +56,7 @@ function getBookAuthorByIndex(index: number): [string, string] /* tuple*/ {
   return [title, author];
 }
 
-function calcTotalPages(): bigint {
+function calcTotalPages()/*: bigint*/ {
   const data = [
     { lib: 'libName1', books: 1_000_000_000, avgPagesPerBook: 250 },
     { lib: 'libName2', books: 5_000_000_000, avgPagesPerBook: 300 },
