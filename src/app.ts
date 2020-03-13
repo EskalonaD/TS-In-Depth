@@ -1,7 +1,8 @@
 import { Category } from "./enums";
-import { Book, Logger as DamageLogger, Librarian, Author } from './interfaces';
-import { ReferenceItem, UniversityLibrarian, RefBook} from './classes';
-import {PersonBook } from './types';
+import { Book, Logger as DamageLogger, Librarian, Author, Magazine } from './interfaces';
+import { ReferenceItem, UniversityLibrarian, RefBook, Shelf} from './classes';
+import {PersonBook, BookRequiredFields, UpdatedBook, CreateCutsomerFunctionType } from './types';
+// import {purge } fr
 import {
   getAllBooks,
   getBookAuthorByIndex,
@@ -17,6 +18,7 @@ import {
   checkoutBooks,
   bookTitleTransform,
   printBook,
+  purge,
   } from './functions';
 // import RefBook from './classes/encyclopedia';
 // imoprt { Category}
@@ -209,3 +211,80 @@ import('./classes').then(module =>{
   reader.take(getAllBooks()[0]);
   console.log(reader.name)
 })
+
+//task 07-01
+const inventory: Book[] =[ 
+  { id: 10, title: 'The C Programming Language', author: 'K & R', available: true, category: Category.Software }, 
+  { id: 11, title: 'Code Complete', author: 'Steve McConnell', available: true, category: Category.Software }, 
+  { id: 12, title: '8-Bit Graphics with Cobol', author: 'A. B.', available: true, category: Category.Software }, 
+  { id: 13, title: 'Cool autoexec.bat Scripts!', author: 'C. D.', available: true, category: Category.Software } 
+  ];
+
+  // console.log(purge(inventory));
+  // console.log(purge([1,2,3,4, '']))
+
+  // task 07.02
+
+  const bookShelf: Shelf<Book> = new Shelf<Book>(); //первый тип можно поустить или в классе опустить (тогда возьмет из типа переменной)
+
+  inventory.forEach(book => bookShelf.add(book));
+
+  const firstBook = bookShelf.getFirst();
+
+  console.log(firstBook);
+
+
+  const magazines: Magazine[] = [ { title: 'Programming Language Monthly', publisher: 'Code Mags' },     { title: 'Literary Fiction Quarterly', publisher: 'College Press' },     { title: 'Five Points', publisher: 'GSU' } ];
+
+const magazineShelf = new Shelf();
+magazines.forEach(mag => magazineShelf.add(mag));
+
+const firstMag = magazineShelf.getFirst();  //unknown should add generic type;
+console.log(firstMag);
+
+// task07/03
+
+
+magazineShelf.printTitle();
+
+const result = magazineShelf.find('Five Points')
+console.log(result);
+
+
+
+//task 07/04
+
+const book1: BookRequiredFields = {
+  id: 1,
+  title: 'title',
+  available: true,
+  author: 'author',
+  category: Category.CSS,
+  pages: 300,
+  markedDamaged: null,
+  markedDamaged1: null,
+}
+
+
+const updatedBook: UpdatedBook = {};
+
+const params: Parameters<CreateCutsomerFunctionType> = [' string', 1];  //tuple?!
+// const p: Parameters<typeof createCustomer> = [' string', 1] // varian investigate
+
+createCustomer(...params);
+// createCustomer(...p);
+
+
+// task 08/01
+
+const o = new UniversityLibrarian();
+console.log(o)
+
+
+//task 08/02
+
+const fLibrarian = new UniversityLibrarian();
+fLibrarian.name = 'Anna'; //age is unavailable cause of decorator; cannot find property;
+
+(o as any).printLibrarian();
+o['printLibrarian']();
