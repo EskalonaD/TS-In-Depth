@@ -1,15 +1,29 @@
 import * as Interfaces from '../interfaces';
-import { sealed, logger } from '../decorators';
+import { sealed, logger, writable, logMethod, logParameter, format } from '../decorators';
 
 
 @logger
 @sealed('UniversityLibrarian')
 export class UniversityLibrarian implements Interfaces.Librarian {
-    department;
+    department: string;
     // assistCustomer;
-    email;
-    name;
-    assistCustomer(custname: string): void {
-        console.log(`${this.name} is assisiting custname`)
+    email: string;
+
+    @format()
+    name: string;
+
+    @logMethod
+    assistCustomer(@logParameter custname: string): void {
+        console.log(`${this.name} is assisiting ${custname}`)
+    }
+
+    @writable(true)
+    assistFaculty() {
+        console.log('Assisting Faculty');
+    }
+
+    @writable(false)
+    teachComunity() {
+        console.log('Taching comunity')
     }
 }

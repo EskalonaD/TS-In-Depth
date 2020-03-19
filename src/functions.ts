@@ -1,4 +1,4 @@
-import { Book,  } from './interfaces';
+import { Book, libMgrCallback,  } from './interfaces';
 import { BookProperties, BookOrUndefined } from './types';
 import { Category } from './enums'
 
@@ -154,4 +154,57 @@ export function getBookProp( book: Book, prop: BookProperties) {
 
 export function purge<T> (inventory: Array<T>): Array<T> {
   return inventory.slice(2);
+}
+
+
+export function getBooksByCategory(category: Category, callback: libMgrCallback): void{
+  setTimeout(() => {
+    try {
+      const titles: string[] = getBookTitlesByCategory(category);
+      if(titles.length > 0) {
+        callback(null, titles);
+      } else {
+        throw new Error('no books Found')
+      }
+    }
+    catch (error) {
+      callback(error, null);
+    }
+  }, 2000)
+}
+
+export function logCategorySearch(err: Error, titles: string[]): void { //for funcExpression we may use interface libMgr
+  if(err) {
+    console.log(`err.msg: ${err.message}`)
+
+  } else {
+    console.log(titles);
+  }
+}
+
+export function getBooksByCategoryPromise(category: Category,): Promise<string[]>{
+  return new Promise<string[]>(
+    (resolve, reject) => {
+      setTimeout(() => {
+        const titles: string[] = getBookTitlesByCategory(category);
+          
+          if(titles.length > 0) {
+            resolve(titles);
+          } else {
+            reject('no books Found')
+          }
+        }
+      , 2000)
+
+    }
+  );
+  
+  
+
+}
+
+
+export async function logSearchResults(category: Category): Promise<any> { //as async-func actually void
+  const numberOfBooks = await getBooksByCategoryPromise(category); //await return not promise bu it result
+  console.log(numberOfBooks.length);
 }

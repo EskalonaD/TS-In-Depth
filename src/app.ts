@@ -19,6 +19,10 @@ import {
   bookTitleTransform,
   printBook,
   purge,
+  getBooksByCategory,
+  logCategorySearch,
+  getBooksByCategoryPromise,
+  logSearchResults,
   } from './functions';
 // import RefBook from './classes/encyclopedia';
 // imoprt { Category}
@@ -288,3 +292,64 @@ fLibrarian.name = 'Anna'; //age is unavailable cause of decorator; cannot find p
 
 (o as any).printLibrarian();
 o['printLibrarian']();
+
+//08.03
+
+const fLibrarian1 = new UniversityLibrarian();
+fLibrarian1.assistFaculty = null;
+fLibrarian1.teachComunity = null;  //should be false check why its wrong
+
+//08.04
+
+const refBook2 = new RefBook('title', 20202, 10)
+refBook2.printItem()
+
+//08.05
+
+const o1 = new UniversityLibrarian();
+o1.name = 'anna';
+
+o.assistCustomer('boris');
+
+//08.06
+
+const o2 = new UniversityLibrarian();
+
+o2.name = 'Anna;'
+
+o2.assistCustomer('boris');
+console.log(o2.name);
+
+//taskk08.07
+
+const refBook4 = new RefBook('title', 2020, 10);
+refBook4.copies = 10;
+refBook.copies = -10;   // should throw an exception;
+
+
+// task 09.01
+
+console.log('begin')
+getBooksByCategory(Category.JavaScript, logCategorySearch);
+getBooksByCategory(Category.Software, logCategorySearch);
+console.log('end');
+
+// task 09.02
+console.log('begin')
+getBooksByCategoryPromise(Category.JavaScript,)
+  .then(titles => {
+    console.log(titles)
+    return titles.length
+  })
+  .then(numberOfBooks => console.log(numberOfBooks));
+getBooksByCategoryPromise(Category.Software,)
+  .catch(err => console.log(`err ${err}`));
+console.log('end');
+
+//09.03
+
+console.log('begin')
+logSearchResults(Category.JavaScript,)
+  .catch(err => console.log(err));  // don't need to use try catch inside async-func we can use promise.prot.catch
+console.log('end');
+
