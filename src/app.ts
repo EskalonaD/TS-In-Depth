@@ -24,8 +24,6 @@ import {
   getBooksByCategoryPromise,
   logSearchResults,
   } from './functions';
-// import RefBook from './classes/encyclopedia';
-// imoprt { Category}
 
 showHello('greeting', 'TypeScript');
 
@@ -33,33 +31,13 @@ function showHello(divName: string, name: string) {
   const elt = document.getElementById(divName);
   elt.innerText = `Hello from ${name}`;
 }
-//==================================
 
-
-
-
-
-
-//=====================================================
-
-
-
-
-//=====================================
-
-
-
-
-
-
-
-
-//=====================================
 
 logFirstAvailable(getAllBooks());
 logBookTitles(getBookTitlesByCategory(Category.JavaScript));
 console.log(getBookAuthorByIndex(1));
 console.log(calcTotalPages());
+
 
 //task 03.01
 
@@ -71,7 +49,6 @@ const book = getBookByID(1);
 console.log(book);
 
 
-
 //task 03.02
 const myID: string = createCustomerID('ann', 10);
 console.log(myID);
@@ -81,6 +58,7 @@ let idGenerator: (name:string, id: number) => string = (name, id) => `${id} - ${
 idGenerator = createCustomerID;
 
 console.log(idGenerator('boris', 20));
+
 
 //task 03.03
 
@@ -94,16 +72,19 @@ console.log(logFirstAvailable());
 
 const myBooks: string[] = checkoutBooks('ann', 1,2,4);
 console.log(myBooks);
+
+
 //task 03.04
 
 const checkedOutBooks: string[] = getTitles(false);
 
 console.log(checkedOutBooks);
 
+
 //task 03.05
 
 console.log(bookTitleTransform(getAllBooks()[0].title));
-console.log(bookTitleTransform(12));
+// console.log(bookTitleTransform(12)); //return error. should be recommented for learning
 
 //task 04.01
 
@@ -123,6 +104,7 @@ printBook(myBook);
 
 myBook.markedDamaged('missing back cover');
 
+
 // task 04.02
 
 const logDamage: DamageLogger = (reason) => console.log('damaged');
@@ -139,6 +121,7 @@ const favouriteAuthor: Librarian = {
   department: 'Classical Literature',
   assistCustomer: null
 }
+
 
 // task 04.04
 
@@ -160,7 +143,6 @@ console.log(getBookProp(getAllBooks()[0], 'title'))
 console.log(getBookProp(getAllBooks()[0], 'markedDamaged'))
 // console.log(getBookProp(getAllBooks()[0], 'isbn'))       //error
 
-
 //task 05.01 
 
 // const ref = new ReferenceItem('myTitle', 2020);
@@ -168,6 +150,7 @@ console.log(getBookProp(getAllBooks()[0], 'markedDamaged'))
 // ref.printItem();
 // ref.publisher = 'my publisher';
 // console.log(ref.publisher);
+
 
 //task 05.02
 
@@ -178,6 +161,7 @@ refBook.printItem();
 refBook.publisher = 'abc';
 console.log(refBook.publisher);
 
+
 // task 05.03
 
 const refBook1 = new RefBook('Title', 2020, 10);
@@ -185,12 +169,14 @@ const refBook1 = new RefBook('Title', 2020, 10);
 refBook1.printCitation();
 console.log(refBook1);
 
+
 // task 05.04
 const favouriteLibrarian: Librarian = new UniversityLibrarian();
 console.log(favouriteLibrarian);
 
 favouriteLibrarian.name='Anna';
 favouriteLibrarian.assistCustomer('Boris');
+
 
 //task 05.05
 
@@ -206,6 +192,7 @@ const personBook: PersonBook = {
 
 console.log(personBook);
 
+
 // task 06/05
 
 import('./classes').then(module =>{
@@ -215,6 +202,7 @@ import('./classes').then(module =>{
   reader.take(getAllBooks()[0]);
   console.log(reader.name)
 })
+
 
 //task 07-01
 const inventory: Book[] =[ 
@@ -227,6 +215,7 @@ const inventory: Book[] =[
   // console.log(purge(inventory));
   // console.log(purge([1,2,3,4, '']))
 
+
   // task 07.02
 
   const bookShelf: Shelf<Book> = new Shelf<Book>(); //первый тип можно поустить или в классе опустить (тогда возьмет из типа переменной)
@@ -237,7 +226,6 @@ const inventory: Book[] =[
 
   console.log(firstBook);
 
-
   const magazines: Magazine[] = [ { title: 'Programming Language Monthly', publisher: 'Code Mags' },     { title: 'Literary Fiction Quarterly', publisher: 'College Press' },     { title: 'Five Points', publisher: 'GSU' } ];
 
 const magazineShelf = new Shelf();
@@ -246,14 +234,13 @@ magazines.forEach(mag => magazineShelf.add(mag));
 const firstMag = magazineShelf.getFirst();  //unknown should add generic type;
 console.log(firstMag);
 
-// task07/03
 
+// task07/03
 
 magazineShelf.printTitle();
 
 const result = magazineShelf.find('Five Points')
 console.log(result);
-
 
 
 //task 07/04
@@ -268,7 +255,6 @@ const book1: BookRequiredFields = {
   markedDamaged: null,
   markedDamaged1: null,
 }
-
 
 const updatedBook: UpdatedBook = {};
 
@@ -297,12 +283,14 @@ o['printLibrarian']();
 
 const fLibrarian1 = new UniversityLibrarian();
 fLibrarian1.assistFaculty = null;
-fLibrarian1.teachComunity = null;  //should be false check why its wrong
+// fLibrarian1.teachComunity = null;  //should be false check why its wrong... however its work on regular code... why it's not seen as a mistake?!   techniclal comment. should be recommented for learning
+
 
 //08.04
 
 const refBook2 = new RefBook('title', 20202, 10)
 refBook2.printItem()
+
 
 //08.05
 
@@ -310,6 +298,7 @@ const o1 = new UniversityLibrarian();
 o1.name = 'anna';
 
 o.assistCustomer('boris');
+
 
 //08.06
 
@@ -320,11 +309,12 @@ o2.name = 'Anna;'
 o2.assistCustomer('boris');
 console.log(o2.name);
 
-//taskk08.07
+
+//task08.07
 
 const refBook4 = new RefBook('title', 2020, 10);
 refBook4.copies = 10;
-refBook.copies = -10;   // should throw an exception;
+// refBook.copies = -10;   // should throw an exception; techniclal comment. should be recommented for learning
 
 
 // task 09.01
@@ -333,6 +323,7 @@ console.log('begin')
 getBooksByCategory(Category.JavaScript, logCategorySearch);
 getBooksByCategory(Category.Software, logCategorySearch);
 console.log('end');
+
 
 // task 09.02
 console.log('begin')
@@ -345,6 +336,7 @@ getBooksByCategoryPromise(Category.JavaScript,)
 getBooksByCategoryPromise(Category.Software,)
   .catch(err => console.log(`err ${err}`));
 console.log('end');
+
 
 //09.03
 
